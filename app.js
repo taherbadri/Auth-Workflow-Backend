@@ -30,12 +30,10 @@ const rateLimiter = require("express-rate-limit");
 // --- use the security packages
 app.use(helmet());
 app.use(xss());
-app.use(
-	cors({
+app.use(cors()); /* {
 		origin: process.env.ORIGIN, // Change to the origin of your app
 		credentials: true,
-	})
-);
+	}*/
 app.set("trust proxy", 1);
 app.use(
 	rateLimiter({
@@ -67,6 +65,7 @@ app.use("/api/v1/users", userRouter);
 app.get("/", (req, res) => {
 	res.send(homepage());
 });
+// app.get("/")
 
 // --- invoke our custom middlewares
 app.use(notFoundMiddleware);
