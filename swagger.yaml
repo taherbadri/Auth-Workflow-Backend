@@ -1,0 +1,311 @@
+openapi: 3.0.0
+info:
+  title: Auth Workflow API
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://auth-workflow-backend-0g7z.onrender.com/api/v1
+    variables: {}
+paths:
+  /auth/logout:
+    delete:
+      tags:
+        - Auth
+      summary: Logout User
+      operationId: LogoutUser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/LoginUserRequest"
+                - example:
+                    email: john@gmail.com
+                    password: secret123
+            example:
+              email: john@gmail.com
+              password: secret123
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/RegisterUserRequest"
+                - example:
+                    username: john
+                    email: john@gmail.com
+                    password: secret
+            example:
+              username: john
+              email: john@gmail.com
+              password: secret
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/verify-email:
+    post:
+      tags:
+        - Auth
+      summary: Verify token
+      operationId: Verifytoken
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/VerifytokenRequest"
+                - example:
+                    verificationToken: d5ca69774adf3ff31e8227b85051da961de2df449c574bfae1103e962e30bf3cc2d5856c4f565701
+                    email: jane@gmail.com
+            example:
+              verificationToken: d5ca69774adf3ff31e8227b85051da961de2df449c574bfae1103e962e30bf3cc2d5856c4f565701
+              email: jane@gmail.com
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/forgot-password:
+    post:
+      tags:
+        - Auth
+      summary: Forgot Password
+      operationId: ForgotPassword
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/reset-password:
+    post:
+      tags:
+        - Auth
+      summary: Reset Password
+      operationId: ResetPassword
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Get all users
+      operationId: Getallusers
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /users/showMe:
+    get:
+      tags:
+        - Users
+      summary: Show Current User
+      operationId: ShowCurrentUser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /users/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The user id;
+    get:
+      tags:
+        - Users
+      summary: Get single user
+      operationId: Getsingleuser
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /users/updateUser:
+    patch:
+      tags:
+        - Users
+      summary: Update User
+      operationId: UpdateUser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/UpdateUserRequest"
+                - example:
+                    username: john
+                    email: john@gmail.com
+            example:
+              username: john
+              email: john@gmail.com
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+  /users/updateUserPassword:
+    patch:
+      tags:
+        - Users
+      summary: Update user password
+      operationId: Updateuserpassword
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/UpdateuserpasswordRequest"
+                - example:
+                    oldPassword: secret
+                    newPassword: secret123
+            example:
+              oldPassword: secret
+              newPassword: secret123
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: john@gmail.com
+        password: secret123
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+        - username
+        - email
+        - password
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        username: john
+        email: john@gmail.com
+        password: secret
+    VerifytokenRequest:
+      title: VerifytokenRequest
+      required:
+        - verificationToken
+        - email
+      type: object
+      properties:
+        verificationToken:
+          type: string
+        email:
+          type: string
+      example:
+        verificationToken: d5ca69774adf3ff31e8227b85051da961de2df449c574bfae1103e962e30bf3cc2d5856c4f565701
+        email: jane@gmail.com
+    UpdateUserRequest:
+      title: UpdateUserRequest
+      required:
+        - username
+        - email
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+      example:
+        username: john
+        email: john@gmail.com
+    UpdateuserpasswordRequest:
+      title: UpdateuserpasswordRequest
+      required:
+        - oldPassword
+        - newPassword
+      type: object
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+      example:
+        oldPassword: secret
+        newPassword: secret123
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+  - httpBearer: []
+tags:
+  - name: Auth
+  - name: Users

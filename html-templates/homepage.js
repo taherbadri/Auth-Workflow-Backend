@@ -45,7 +45,7 @@ const homepage = () => {
         <h1>Auth Workflow API</h1>
     </header>
     <main>
-        <p>Click <a href="documentation.html">here</a> for documentation.</p>
+        <p>Click <a href="/api-docs">here</a> for documentation.</p>
     </main>
 </body>
 </html>

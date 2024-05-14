@@ -20,6 +20,12 @@ const notFoundMiddleware = require("./middlewares/notFoundMiddleware");
 const errorHandlingMiddleware = require("./middlewares/errorHandlingMiddleware");
 // --- import middlewares
 
+// --- import documentation libs
+const swaggerUI = require("swagger-ui-express");
+const YAML = require("yamljs");
+const swaggerDocument = YAML.load("./swagger.yaml");
+// --- import documentation libs
+
 // --- import security packages
 const cors = require("cors");
 const helmet = require("helmet");
@@ -66,7 +72,7 @@ app.use("/api/v1/users", userRouter);
 app.get("/", (req, res) => {
 	res.send(homepage());
 });
-// app.get("/")
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // --- invoke our custom middlewares
 app.use(notFoundMiddleware);
