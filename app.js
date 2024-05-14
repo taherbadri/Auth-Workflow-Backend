@@ -28,20 +28,20 @@ const rateLimiter = require("express-rate-limit");
 // --- import security packages
 
 // --- use the security packages
-// app.use(helmet());
-// app.use(xss());
-// app.use(cors());
+app.use(helmet());
+app.use(xss());
+app.use(cors());
 /* {
 		origin: process.env.ORIGIN, // Change to the origin of your app
 		credentials: true,
 	}*/
-// app.set("trust proxy", 1);
-// app.use(
-// 	rateLimiter({
-// 		windowMs: 15 * 60 * 1000,
-// 		max: 150,
-// 	})
-// );
+app.set("trust proxy", 1);
+app.use(
+	rateLimiter({
+		windowMs: 15 * 60 * 1000,
+		max: 150,
+	})
+);
 // --- use the security packages
 
 // --- use the middlewares
