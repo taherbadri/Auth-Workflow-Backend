@@ -36,7 +36,20 @@ const rateLimiter = require("express-rate-limit");
 // --- use the security packages
 app.use(helmet());
 app.use(xss());
-app.use(cors());
+
+const corsOptions = {
+	origin: (origin, callback) => {
+		const allowedOrigins = [process.env.ORIGIN, "http://localhost:5173"];
+		if (!origin) return callback(null, true);
+		if (allowedOrigins.indexOf(origin) !== 1) {
+			return callback(null, true);
+		} else {
+			return callback(new BadRequestError("not allowed by cors"));
+		}
+	},
+	credentials: true,
+};
+app.use(cors(corsOptions));
 /* {
 		origin: process.env.ORIGIN, // Change to the origin of your app
 		credentials: true,
@@ -62,6 +75,7 @@ app.use(cookieParser(process.env.JWT_SECRET));
 const authRouter = require("./routers/authRouter");
 const userRouter = require("./routers/userRouter");
 const { homepage } = require("./html-templates/homepage");
+const { BadRequestError } = require("./errors");
 // --- import routes from router
 
 // --- api routes "/api/v1"
