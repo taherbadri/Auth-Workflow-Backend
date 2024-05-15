@@ -30,7 +30,6 @@ const attachCookiesToResponse = ({ res, tokenUser, refreshToken }) => {
 		expires: new Date(Date.now() + oneDay),
 	});
 };
-``;
 
 const checkForExistingToken = ({ existingToken, res, tokenUser }) => {
 	const { isValid } = existingToken;
