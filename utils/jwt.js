@@ -25,7 +25,7 @@ const attachCookiesToResponse = ({ res, tokenUser, refreshToken }) => {
 	});
 	res.cookie("accessToken", accessTokenJWT, {
 		httpOnly: true,
-		secure: process.env.NODE_ENV === "production",
+		secure: true,
 		signed: true,
 		expires: new Date(Date.now() + oneDay),
 	});

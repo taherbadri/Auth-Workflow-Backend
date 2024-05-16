@@ -31,12 +31,13 @@ const cors = require("cors");
 const helmet = require("helmet");
 const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
+const mongoSanitize = require("express-mongo-sanitize");
 // --- import security packages
 
 // --- use the security packages
 app.use(helmet());
 app.use(xss());
-
+app.use(mongoSanitize());
 const corsOptions = {
 	origin: (origin, callback) => {
 		const allowedOrigins = [process.env.ORIGIN, "http://localhost:5173"];
