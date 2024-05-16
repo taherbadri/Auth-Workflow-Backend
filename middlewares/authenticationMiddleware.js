@@ -6,6 +6,8 @@ const Token = require("../models/Token");
 const authenticateUser = async (req, res, next) => {
 	const { refreshToken, accessToken } = req.signedCookies;
 	console.log(process.env.NODE_ENV);
+	console.log(process.env.NODE_ENV === "production");
+	console.log(process.env.NODE_ENV !== "production");
 	console.log(req.signedCookies);
 
 	try {
