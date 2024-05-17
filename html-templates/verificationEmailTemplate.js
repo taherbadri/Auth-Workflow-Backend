@@ -44,7 +44,7 @@ const verificationEmailHTML = ({ origin, verificationToken, email }) => {
   <div class="container">
     <h2>Email Verification</h2>
     <p>Thank you for signing up! To verify your email address, please click the button below:</p>
-    <a href="${origin}/verify-email?verificationToken=${verificationToken}&email${email}" class="btn">Verify Email</a>
+    <a href="${origin}/verify-email?verificationToken=${verificationToken}&email=${email}" class="btn">Verify Email</a>
     <p>If you did not sign up for an account, you can ignore this email.</p>
   </div>
 </body>
